@@ -32,17 +32,7 @@ game = \
 000000028
 '''.replace('\n', '')
 
-''' template:
-    [0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0, 0]
-'''
+
 SOL = [[a[0], int(a[1])] for a in zip(*(range(L ** 2), game))]
 
 # space = [range(1,L+1) for a in range(L**2)]
@@ -60,9 +50,6 @@ SQi = sorted([[a[0], int(b[1] / 3) * 3 + int(a[1] / 3)] for a in VEi for b in HO
 Ui = [u + [h[1], ] for u in Ui for h in HOi if u[0] == h[0]]
 Ui = [u + [v[1], ] for u in Ui for v in VEi if u[0] == v[0]]
 Ui = [u + [s[1], ] for u in Ui for s in SQi if u[0] == s[0]]
-
-
-# domain = {'H': 1, 'V': 2, 'S': 3}
 
 
 def reset_li(u_, vals):
@@ -144,10 +131,11 @@ def try_solve(u_, sol_):
             break
 
 
-# omg!
+# caveat! 
+# There is an issue with the script not working correctly if the 
+# Ui list has been altered.
 Ui_copy = [a.copy() for a in Ui]
 
-# SOL[1] = [1, 2]
 candidate, sol_space, sol_x = try_solve(Ui_copy, SOL.copy())
 snap_ui1 = candidate.copy()
 snap_sol1 = sol_space.copy()
